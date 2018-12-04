@@ -3,7 +3,7 @@
     <header class="msheadbox">
         <div class="msfixe mspurple">
             <div class="aubgs msbacks" id="goback"></div>
-            <h2 class="jeflex mstitle" v-if="status==='register'">注册登录</h2>
+            <h2 class="jeflex mstitle" v-if="status==='register'">{{Header[0]}}</h2>
             <div class="aubgs"></div>
         </div>
     </header>
@@ -25,5 +25,9 @@
 </script>
 
 <style scoped>
+@import url("../assets/base.css");
+@import url("../assets/jeui.css");
+@import url("../assets/icon.css");
+@import url("../assets/members.css");
 
 </style>
