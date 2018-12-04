@@ -14,11 +14,29 @@ import axios from 'axios';
 import qs from 'qs';
 Vue.prototype.$qs = qs;
 
+import Swiper from "swiper"; 
+import "swiper/dist/css/swiper.min.css";
+
 //一级路由
 import Register from "./container/Register.vue";//注册
+import Gindex from "./container/Gindex.vue";
 
 const routes = [
-     { path: '/register', name:"register",component:Register },
+    {
+      path: '/',
+      redirect: '/index'
+    },
+    { 
+      path: '/index',
+      name:"index",
+      component:Gindex 
+    },
+    { 
+      path: '/register',
+      name:"register",
+      component:Register 
+    }
+    
 ]
 
 
@@ -65,8 +83,9 @@ const store = new Vuex.Store({
 })
 
 
+
 new Vue({
-     router,
-     store,
+  router,
+  store,
   render: h => h(App),
 }).$mount('#app')
