@@ -9,7 +9,8 @@
 						<p class="g3">手机号码</p>
 						<p class="bg-wh jepor jeflex flexbox f14 ml20 pt5 pb5">
 							<input class="jew100 show input-noneLine" name="memberPhone" type="text" placeholder="请输入手机号码" autocomplete="on" id="memberPhone" @blur ="seeNumber" ref = "phoneNumber"/>
-							<input type="button" class="btn-code jepoa purple fmy jew20 show" style="background-color: #fff;" id="resetCap" value="获取验证码" @click="getNum"/>
+							<input v-if="showCountDown" type="button" class="btn-code jepoa purple fmy jew20 show" style="background-color: #fff;" id="resetCap" v-bind:value="showBut" @click="getNum"/>
+							<input v-if="!showCountDown" type="button" class="btn-code jepoa purple fmy jew20 show" style="background-color: #fff;" id="resetCap" v-bind:value="showBut" />
 						</p>
 					</li>
 					<li class="pt10 bg-wh pl15 pr15 pb10 jepor jecell-bottom flexbox je-align-center">
@@ -33,27 +34,27 @@
 							<input class="jeflex show input-noneLine" type="password" placeholder="确认密码" id="password2"/>
 						</p>
 					</li>
-					<li class="f12  pt5 mt10 pr15 pl35 jepor "><input class="agreebtnbox jepor" checked="" id="agreement" type="checkbox">我已阅读并同意<span class="tdu" >《洋葱OMALL平台服务协议》</span></li>
+					<li class="f12  pt5 mt10 pr15 pl35 jepor "><input class="agreebtnbox jepor" checked="" id="agreement" type="checkbox">我已阅读并同意<span class="tdu" @click="toContract">《洋葱OMALL平台服务协议》</span></li>
 				</ul>
 			</div>
 		</div>
 		<!--确认注册-->
-		<div class="btn-div pt20 pl15 pr15"><span class="show rdu5 bg-purple white tc p10 f14" id="registerBtn">确认注册</span></div>
-		<img src="../imags/icon_reg.jpg" class="mt20">
+			<div class="btn-div pt20 pl15 pr15"><span class="show rdu5 bg-purple white tc p10 f14" id="registerBtn">确认注册</span></div>
+			<img src="../imags/icon_reg.jpg" class="mt20">
 
-		<div class="pl15 pr15">
-		    <div class="tc regBtn jepor mt15  pt10 f14 pb10" >
-		    	<img src="../imags/login_direct_icon.png" class="mr5">已有账号，请登录
-		    </div>
-		</div>
+			<div class="pl15 pr15">
+			    <div class="tc regBtn jepor mt15  pt10 f14 pb10" >
+			    	<img src="../imags/login_direct_icon.png" class="mr5">已有账号，请登录
+			    </div>
+			</div>
 
 		<!--弹窗-->
 		<div id="jembox6" class="jemboxer jembox1" style="z-index:10000" jmb="6" v-if="popUps">
-			<div class="jemboxmask" style="pointer-events:auto;background-color:rgba(0,0,0,0.5);"></div>
+			<div class="jemboxmask" style="pointer-events:auto;background-color:rgba(0,0,0,0.5);" @click="hidePopUps"></div>
 			<div class="jemboxmain">
 				<div class="jemboxsection">
 					<div class="jemboxchild jemboxanim" style="background-color:#fff;"><span class="jemboxclose01" style="display:none"></span>
-						<div class="jemboxmcont" style="padding:10px 10px;"><div class="jew100 tc pt5 pb5">请您填写手机号码.</div>
+						<div class="jemboxmcont" style="padding:10px 10px;"><div class="jew100 tc pt5 pb5">{{popUpsTit}}</div>
 						</div>
 					</div>
 				</div>
@@ -72,6 +73,9 @@
 		data(){
 			return {
 				popUps:false,
+				popUpsTit:"请您填写手机号码",
+				showCountDown:true,
+				showBut:"获取验证码"
 				
 			}
 
@@ -89,12 +93,34 @@
 			},
 			getNum(){
 			let val = this.$refs.phoneNumber.value;
-				if(!/^1[3-9]\d{9}$/i.test(val)&&val.trim()!=""){
-				    alert("手机号码不正确");
+				if(!/^1[3-9]\d{9}$/i.test(val)&&val.trim!=""){//真坑！！在vue的写法中，清除空格trim,不需要加括号
+
+				    this.popUps=true;
 				    this.$refs.phoneNumber.value=""
+				    
 				 }else{
-				 	alert("手机号码正确");
+				 	this.showCountDown = !this.showCountDown;
+				 	this.countDown();
 				 }
+			},
+			hidePopUps(){//隐藏弹窗提示
+				this.popUps=false;
+			},
+			countDown(){
+				let times=60;
+				var coT = setInterval(()=>{
+					--times;
+					this.showBut = times+"s后重新获取";
+					if(times==0){
+					clearInterval(coT);
+					this.showBut = "重新获取";
+					this.showCountDown = !this.showCountDown;
+					}
+				},1000)
+
+			},
+			toContract(){
+				this.$router.push("contract");
 			}
 		}
 	};
