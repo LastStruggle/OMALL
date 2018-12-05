@@ -12,9 +12,7 @@
 
 <script>
 export default {
-  props:{
-    inputName:Object
-  }
+  
 };
 </script>
 

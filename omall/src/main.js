@@ -20,6 +20,7 @@ import "swiper/dist/css/swiper.min.css";
 //一级路由
 import Register from "./container/Register.vue";//注册
 import Gindex from "./container/Gindex.vue";
+import Gnavdetail from "./container/Gnavdetail.vue";
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
       path: '/index',
       name:"index",
       component:Gindex 
+    },
+    { 
+      path: '/navdetail',
+      name:"navdetail",
+      component:Gnavdetail 
     },
     { 
       path: '/register',

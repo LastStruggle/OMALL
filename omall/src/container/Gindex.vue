@@ -1,8 +1,9 @@
 <template>
   <div>
     <Gsearch :inputName="indexdatas"/>
-    <Gswiper :inputName="indexdatas"/>
-    <Gactivity/>
+    <Gswiper :lunbotu="swiperData" :nav="swiperNavData" :newData="newDailyData" :zhongcao="Growgrass"/>
+    <Gactivity :activity="activityData"/>
+    <Gxinren />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Gsearch from "../components/Gsearch.vue";
 import Gswiper from "../components/Gswiper.vue";
 import Gactivity from "../components/Gactivity.vue";
+import Gxinren from "../components/Gxinren.vue";
 
 import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
@@ -19,25 +21,36 @@ export default {
   components: {
     Gsearch,
     Gswiper,
-    Gactivity
+    Gactivity,
+    Gxinren
   },
   data() {
     return {
-      indexdatas: ""
+      indexdatas: "",
+      swiperData:"",
+      swiperNavData:"",
+      newDailyData:"",
+      Growgrass:"",
+      activityData:""
     };
   },
   //生命周期
   created() {
     this.firstLoad();
-    //this.loadMore();
+    this.loadMore();
   },
   methods: {
     firstLoad() {
       axios
-        .get("/api")
+        .get("/api/onionIndex/homePage")
         .then(response => {
           console.log(response.data.data);
-          this.indexdatas=response.data.data
+          this.indexdatas=response.data.data;
+          this.swiperData=response.data.data.mainDataList.adList.data;
+          this.swiperNavData = response.data.data.mainDataList.categoryList.data;
+          this.newDailyData = response.data.data.hotIndexDataList;
+          this.Growgrass = response.data.data.grassDataList;
+          this.activityData = response.data.data.mainDataList.activityList.data
         })
         .catch(error => {
           //console.log(error);
@@ -49,7 +62,7 @@ export default {
       });
       axios({
         method: "post",
-        url: "/apig",
+        url: "/api/onionIndex/getguessYouLike",
         data: postData
       })
         .then(response => {
