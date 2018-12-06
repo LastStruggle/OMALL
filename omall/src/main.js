@@ -8,7 +8,9 @@ Vue.use(VueRouter)
 //引入vuex模块
 import Vuex from 'vuex'
 Vue.use(Vuex)
-
+//引入mint-ui
+import Mint from 'mint-ui';
+Vue.use(Mint);
 //安装引入qs解决axios,post发送数据的配置问题
 import axios from 'axios';
 import qs from 'qs';

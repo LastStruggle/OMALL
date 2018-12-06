@@ -76,7 +76,7 @@ export default {
         method: "get",
         url:"/api/app/index/menu/v1"
       }).then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         this.navList =response.data
       });
     }
