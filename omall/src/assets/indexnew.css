@@ -761,16 +761,20 @@
 }
 
 .waterfall>ul {
-	width: 50%;
+	width: 100%;
 }
-
-.waterfall>ul:nth-child(2n-1) {
+.waterfall>ul li{
+	width: 50%;
+	float: left;
+	height: 275px;
+}
+/* .waterfall>ul:nth-child(2n-1) {
 	float: left
 }
 
 .waterfall>ul:nth-child(2n) {
 	float: right
-}
+} */
 
 .waterfall .contsbox {
 	padding: 5px;

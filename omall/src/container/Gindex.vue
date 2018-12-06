@@ -4,6 +4,7 @@
     <Gswiper :lunbotu="swiperData" :nav="swiperNavData" :newData="newDailyData" :zhongcao="Growgrass"/>
     <Gactivity :activity="activityData"/>
     <Gxinren />
+    <Gindexmain />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import Gsearch from "../components/Gsearch.vue";
 import Gswiper from "../components/Gswiper.vue";
 import Gactivity from "../components/Gactivity.vue";
 import Gxinren from "../components/Gxinren.vue";
+import Gindexmain from "../components/Gindexmain.vue";
 
 import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
@@ -22,7 +24,8 @@ export default {
     Gsearch,
     Gswiper,
     Gactivity,
-    Gxinren
+    Gxinren,
+    Gindexmain
   },
   data() {
     return {
@@ -37,7 +40,7 @@ export default {
   //生命周期
   created() {
     this.firstLoad();
-    this.loadMore();
+
   },
   methods: {
     firstLoad() {
@@ -56,27 +59,12 @@ export default {
           //console.log(error);
         });
     },
-    loadMore() {
-      let postData = qs.stringify({
-        pageNo: 10
-      });
-      axios({
-        method: "post",
-        url: "/api/onionIndex/getguessYouLike",
-        data: postData
-      })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          //console.log(error);
-        });
-    }
+    
   }
 };
 </script>
 
-<style>
+<style scoped>
 @import url("../assets/indexnew.css");
 @import url("../assets/jeui.css");
 </style>

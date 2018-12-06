@@ -1,13 +1,13 @@
 <template>
   <div>
-    <!-- <Gheader /> -->
-    <Gallswipers/>
+    <Gheader stutas="navdetail"/>
+    <GnavdetailMain />
   </div>
 </template>
 
 <script>
 import Gheader from "../components/Gheader.vue";
-import Gallswipers from "../components/Gallswipers.vue";
+import GnavdetailMain from "../components/GnavdetailMain.vue";
 
 import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
@@ -16,26 +16,19 @@ import qs from "qs";
 export default {
   components: {
     Gheader,
-    Gallswipers
+   GnavdetailMain
   },
-  created() {
-    this.detailLoad();
-  },
-  methods: {
-    detailLoad() {
-      axios({
-        method: "get",
-        url: "/api/app/product/getLetParent/v2",
-        data: {
-          pid: 49
-        }
-      }).then(response => {
-        console.log(response);
-      });
-    }
+  data(){
+      return {
+          navArr:[],
+          pid:48
+      }
   }
 };
 </script>
-<style>
+<style scoped>
 @import url("../assets/newbase.css");
+@import url("../assets/base.css");
+
+@import url("../assets/goods.css");
 </style>
