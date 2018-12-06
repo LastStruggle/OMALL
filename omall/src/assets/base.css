@@ -33,7 +33,7 @@ body{padding: 0;min-width: 300px;max-width: 640px;margin: 0 auto;position: relat
 .msbacks{background-image:url(../imags/icon-back.png)!important;}
 /* .msclass{background-image:url(http://img.51msyc.com/wx/nimages/icon-class.png)!important;} */
 .msmenus{background-image:url(http://img.51msyc.com/wx/nimages/icon-menu.png)!important;}
-/*.msmenus{background-image:url(../nimages/icon-menu.png)!important;} */
+.msmenus{background-image:url(../imags/icon-menu.png)!important;} 
 .msmores{background-image:url(http://img.51msyc.com/wx/nimages/icon-more.png)!important;} 
 .mslianx{background-image:url(http://img.51msyc.com/wx/nimages/icon-lianx.png)!important;}
 .msapp{background-image:url(http://img.51msyc.com/wx/nimages/icon-app.png)!important;}

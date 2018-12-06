@@ -16,10 +16,14 @@ Vue.prototype.$qs = qs;
 
 //一级路由
 import Register from "./container/Register.vue";//注册
+import Login from "./container/Login.vue";//登录
+import Password from "./container/Password.vue";//找回密码
 import Contract from "./container/Contract.vue";//合约
 
 const routes = [
      { path: '/register', name:"register",component:Register },
+     { path: '/login', name:"login",component:Login },
+     { path: '/password', name:"password",component:Password },
      { path: '/contract', name:"contract",component:Contract },
 ]
 
